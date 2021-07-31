@@ -11,7 +11,7 @@ public class Example {
     }
 
     public void example(){
-        Account acc = new Account("2345235", LocalDate.of(2010, Month.JUNE,26),100_000,30_000);
+        //Account acc = new Account("2345235", LocalDate.of(2010, Month.JUNE,26),100_000,30_000);
 
 
     }

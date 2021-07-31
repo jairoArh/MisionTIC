@@ -7,7 +7,7 @@ import java.time.Month;
 
 public class Runner {
     public static void main(String[] args) {
-        Account account = new Account("2345235", LocalDate.of(2010, Month.JULY,26),100000.0,30000.0);
+        /*Account account = new Account("2345235", LocalDate.of(2010, Month.JULY,26),100000.0,30000.0);
 
 
         System.out.printf("El Saldo es %.2f\n", account.getBalance());
@@ -28,6 +28,6 @@ public class Runner {
             System.out.printf("Saldo Insuficiente, Saldo es %.2f\n", account.getBalance());
         }
 
-        System.out.println( account.getAge());
+        System.out.println( account.getAge());*/
     }
 }

@@ -3,17 +3,16 @@ package model;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Account implements ActionsAccount {
+public abstract class Account implements ActionsAccount {
      protected String number;
-    private LocalDate dateOpen;
-    private double balance;
-    private double minBalance;
+     protected LocalDate dateOpen;
+     protected double balance;
 
-    public Account(String number, LocalDate dateOpen, double balance, double minBalance) {
+    public Account(String number, LocalDate dateOpen, double balance) {
         this.number = number;
         this.dateOpen = dateOpen;
         this.balance = balance;
-        this.minBalance = minBalance;
+
     }
 
     public String getNumber() {
@@ -36,13 +35,6 @@ public class Account implements ActionsAccount {
         return balance;
     }
 
-    public double getMinBalance() {
-        return minBalance;
-    }
-
-    public void setMinBalance(double minBalance) {
-        this.minBalance = minBalance;
-    }
 
     @Override
     public String toString() {
@@ -50,25 +42,12 @@ public class Account implements ActionsAccount {
                 "number='" + number + '\'' +
                 ", dateOpen=" + dateOpen +
                 ", balance=" + balance +
-                ", minBalance=" + minBalance +
                 '}';
     }
-
 
     @Override
     public void deposit(double value) {
         balance += value;
-    }
-
-    @Override
-    public boolean withDraw(double value) {
-        if( value <= ( getBalance() - getMinBalance( ) ) ){
-            balance -= value;
-
-            return true;
-        }
-
-        return false;
     }
 
     @Override
