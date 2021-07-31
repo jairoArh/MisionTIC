@@ -1,16 +1,29 @@
 package model;
 
 public class Sale {
+    private String idSale;
     private String product;
     private double valueProduct;
     private short amount;
     private boolean iva;
 
-    public Sale(String product, double valueProduct, short amount, boolean iva) {
+    //Definición de una constante
+    public static final float IVA = 0.19F;
+
+    public Sale(String idSale, String product, double valueProduct, short amount, boolean iva) {
+        this.idSale = idSale;
         this.product = product;
         this.valueProduct = valueProduct;
         this.amount = amount;
         this.iva = iva;
+    }
+
+    public String getIdSale() {
+        return idSale;
+    }
+
+    public void setIdSale(String idSale) {
+        this.idSale = idSale;
     }
 
     public String getProduct() {
@@ -76,7 +89,7 @@ public class Sale {
 
     public double calcIVA() {
 
-        return isIva() ? valueProduct * amount * 0.19 : 0.0;
+        return isIva() ? valueProduct * amount * IVA : 0.0;
 
     }
 }

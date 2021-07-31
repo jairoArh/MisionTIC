@@ -9,18 +9,18 @@ class SaleTest {
     @Test
     void testLiquidateSale() {
 
-        Sale sale = new Sale("Pantalon",150000,(short)3,true);
+        Sale sale = new Sale("42534","Pantalon",150000,(short)3,true);
 
-        assertEquals(400500,sale.liquidateSale());
+        assertEquals(400500,sale.liquidateSale(),0.1);
 
     }
 
     @Test
     void testCalcIVA() {
-        Sale sale = new Sale("Pantalon",150000,(short)3,true);
-        assertEquals(85500, sale.calcIVA());
+        Sale sale = new Sale("vta945","Pantalon",150000,(short)3,true);
+        assertEquals(85500, sale.calcIVA(),0.1);
 
         sale.setIva(false);
-        assertEquals(0.0, sale.calcIVA());
+        assertEquals(0.0, sale.calcIVA(),0.1);
     }
 }
