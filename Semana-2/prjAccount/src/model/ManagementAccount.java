@@ -11,16 +11,38 @@ public class ManagementAccount {
     }
 
     public Account findAccount(String number){
+
+        for (Account account : accounts ){
+            if ( account.getNumber().equals( number ) ){
+
+                return account;
+            }
+        }
+
         return null;
     }
 
-    public boolean addAccount(String number, LocalDate dateOpen, double balance, double minBalance ){
+    public void addAccount(Account account){
 
-        return false;
+        accounts.add( account );
+    }
+
+    public void deposit(Account account, double value ){
+        account.deposit( value );
+    }
+
+    public boolean withDraw( Account account, double value ){
+
+        return account.withDraw( value );
+    }
+
+    public boolean transferAccount(AccountDeposit source, AccountDeposit target, double value){
+
+        return source.transferAccount( target, value );
     }
 
     public ArrayList<Account> getAccounts(){
 
-        return null;
+        return (ArrayList<Account>) accounts.clone();
     }
 }

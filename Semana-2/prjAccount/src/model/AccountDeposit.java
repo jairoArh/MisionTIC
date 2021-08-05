@@ -16,6 +16,8 @@ public class AccountDeposit extends Account{
 
         if( value <= ( balance - MIN_BALANCE ) ){
             balance -= value;
+
+            return true;
         }
 
         return false;
@@ -27,5 +29,17 @@ public class AccountDeposit extends Account{
 
     public void setExcent(boolean excent) {
         this.excent = excent;
+    }
+
+    public boolean transferAccount( AccountDeposit account, double value ){
+
+        if( value <= ( balance - MIN_BALANCE)){
+            balance -= value;
+            account.deposit( value );
+
+            return true;
+        }
+
+        return false;
     }
 }
