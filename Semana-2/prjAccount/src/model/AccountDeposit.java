@@ -4,11 +4,21 @@ import java.time.LocalDate;
 
 public class AccountDeposit extends Account{
     public static final double MIN_BALANCE =  50000.0;
+    private double interestRate;
     private boolean excent;
 
-    public AccountDeposit(String number, LocalDate dateOpen, double balance, boolean excent) {
+    public AccountDeposit(String number, LocalDate dateOpen, double balance, double interestRate, boolean excent) {
         super(number, dateOpen, balance);
         this.excent = excent;
+        this.interestRate = interestRate;
+    }
+
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
     }
 
     @Override

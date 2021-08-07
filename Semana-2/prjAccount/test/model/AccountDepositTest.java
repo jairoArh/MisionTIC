@@ -12,8 +12,8 @@ class AccountDepositTest {
     private AccountDeposit accountTarget;
 
     private void setup(){
-        account = new AccountDeposit("563-45354", LocalDate.of(2010, Month.JUNE,25),100_000,true);
-        accountTarget = new AccountDeposit("563-45354", LocalDate.of(2010, Month.JUNE,25),50_000,true);
+        account = new AccountDeposit("563-45354", LocalDate.of(2010, Month.JUNE,25),100_000, 2.0,true);
+        accountTarget = new AccountDeposit("563-45354", LocalDate.of(2010, Month.JUNE,25),50_000, 2.0,true);
     }
 
     @Test
