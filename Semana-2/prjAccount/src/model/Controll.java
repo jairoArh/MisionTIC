@@ -13,7 +13,7 @@ public class Controll {
      * Método que permite consigar a una cuenta
      * @param numberAccount Especifica el numero de la cuenta a donde se va a consignar
      * @param value Especifica el valor a consignar
-     * @return boolea, indica si tuvo exito la operación
+     * @return boolean, indica si tuvo exito la operación
      */
     public boolean deposit(String numberAccount, double value){
 
@@ -88,13 +88,18 @@ public class Controll {
         return false;
     }
 
-    public boolean withDraw( String numberAccount, double value){
+    public boolean withDraw( String numberAccount, double value) throws Exception {
+        Account account = mngAccount.findAccount(numberAccount);
+        if( account != null ){
+            return mngAccount.withDraw( account, value );
+        }
 
-        return false;
+        throw new Exception("No Existe el Número de Cuenta");
     }
 
     public boolean transferAccount( String sourceAccount, String targetAccount, double value){
 
         return false;
     }
+
 }

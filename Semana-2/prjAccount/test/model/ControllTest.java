@@ -33,8 +33,13 @@ class ControllTest {
     @Test
     void findAccount() {
         setup();
+        //Si el número de campos es cinco, la cuenta es de Depósito
         assertEquals(5, controll.findAccount("596-43534").length);
+
+        //Si el número de campos es cuatro, la cuenta es corriente
         assertEquals(4, controll.findAccount("23423432").length);
+
+        //Cuando la cuenta no existe, retona null
         assertNull( controll.findAccount("453453"));
     }
 
@@ -49,6 +54,26 @@ class ControllTest {
 
     @Test
     void withDraw() {
+        setup();
+        //Para la cuenta de Depósito, solo se podrá retirar $50.000
+        try {
+            assertFalse(controll.withDraw("596-43534",50001));
+            assertTrue(controll.withDraw("596-43534",30000));
+            assertEquals(70000.0, controll.findAccount("596-43534")[2]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Para la cuenta Corriente, teniendo en cuenta el sobregiro, se podrá retirar hasta $700.000
+        try {
+            assertFalse(controll.withDraw("23423432",700001));
+            assertTrue(controll.withDraw("23423432",600000));
+            assertEquals(-100000.0, controll.findAccount("23423432")[2]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assertThrows( Exception.class,() -> assertFalse(controll.withDraw("56754",50001)));
     }
 
     @Test
