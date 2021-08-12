@@ -71,4 +71,22 @@ public class MainWindow extends JFrame {
             JOptionPane.showMessageDialog(null,"Número de Cuenta ya Registrada","Error",JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public void transaction(){
+        String[] data = panelTransactions.getFields();
+        String number = data[0];
+        double value = Double.parseDouble( data[2]);
+
+       if( data[1].equals("C")){
+           if( controll.deposit( number,value ) ){
+               Object[] account = controll.findAccount( number );
+               JOptionPane.showMessageDialog(null,"Transacción Exitosa, su nuevo saldo es " + account[2],"Hecho",JOptionPane.INFORMATION_MESSAGE);
+               panelTransactions.cleanFields();
+           }else{
+               JOptionPane.showMessageDialog(null,"Número de Cuenta No Registrada","Error",JOptionPane.ERROR_MESSAGE);
+           }
+       }else{
+            //TODO realizar Retiro
+       }
+    }
 }

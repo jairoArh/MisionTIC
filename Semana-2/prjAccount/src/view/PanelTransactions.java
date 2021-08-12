@@ -2,9 +2,10 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Date;
 
-public class PanelTransactions extends JPanel {
-    private MainWindow mainWindow;
+public class PanelTransactions extends PanelAccount {
+
     private JComboBox<String> numberAccounts;
     private JRadioButton deposit;
     private JRadioButton withDraw;
@@ -12,13 +13,13 @@ public class PanelTransactions extends JPanel {
     private JButton accept;
 
     public PanelTransactions(MainWindow mainWindow){
-        this.mainWindow = new MainWindow();
+        super(mainWindow);
         setLayout(new GridLayout(5,2));
         beginComponents();
         addComponents();
     }
 
-    private void addComponents() {
+    protected void addComponents() {
         add(new JLabel("Consignar/Retirar"));
         add(new JLabel());
         add(new JLabel("Numero Cuenta"));
@@ -44,7 +45,7 @@ public class PanelTransactions extends JPanel {
         add(accept);
     }
 
-    private void beginComponents() {
+    protected void beginComponents() {
         numberAccounts = new JComboBox<>();
 
         deposit = new JRadioButton();
@@ -52,10 +53,27 @@ public class PanelTransactions extends JPanel {
         withDraw = new JRadioButton();
 
         value = new JTextField();
+
         accept = new JButton("Confirmar");
+        accept.setActionCommand( HandlingEvents.TRANSACTION );
+        accept.addActionListener( new HandlingEvents(mainWindow));
+    }
+
+    @Override
+    public String[] getFields() {
+        String number = numberAccounts.getItemAt( numberAccounts.getSelectedIndex());
+        String type = deposit.isSelected() ? "C" : "R";
+        String valueTransaction = value.getText();
+
+        return new String[]{number,type,valueTransaction};
     }
 
     public void addNumberAccount(String number){
         numberAccounts.addItem( number );
+    }
+
+    @Override
+    public void cleanFields(){
+        //Limpiar Campos
     }
 }
