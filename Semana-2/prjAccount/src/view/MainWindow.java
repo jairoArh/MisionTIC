@@ -11,6 +11,7 @@ public class MainWindow extends JFrame {
     private PanelAccountDeposit panelDeposit;
     private PanelAccountCurrent panelCurrent;
     private PanelTransactions panelTransactions;
+    private MainMenu mainMenu;
     private Controll controll;
 
     public MainWindow(){
@@ -31,6 +32,7 @@ public class MainWindow extends JFrame {
         panelDeposit = new PanelAccountDeposit(this);
         panelCurrent = new PanelAccountCurrent( this );
         panelTransactions = new PanelTransactions( this );
+        mainMenu = new MainMenu( this );
     }
 
     private void addComponents() {
@@ -38,6 +40,7 @@ public class MainWindow extends JFrame {
         tabbedPane.add( "Cuenta Corriente",panelCurrent );
         tabbedPane.add( "Transacciones",panelTransactions );
         add(tabbedPane);
+        setJMenuBar( mainMenu );
     }
 
     public void addAccountDeposit() {
@@ -75,7 +78,7 @@ public class MainWindow extends JFrame {
     public void transaction(){
         String[] data = panelTransactions.getFields();
         String number = data[0];
-        double value = Double.parseDouble( data[2]);
+        double value = Double.parseDouble( data[2] );
 
        if( data[1].equals("C")){
            if( controll.deposit( number,value ) ){
@@ -86,7 +89,22 @@ public class MainWindow extends JFrame {
                JOptionPane.showMessageDialog(null,"Número de Cuenta No Registrada","Error",JOptionPane.ERROR_MESSAGE);
            }
        }else{
-            //TODO realizar Retiro
+           try {
+               if( controll.withDraw(number,value ) ){
+                   Object[] account = controll.findAccount( number );
+                   JOptionPane.showMessageDialog(null,"Transacción Exitosa, su nuevo saldo es " + account[2],"Hecho",JOptionPane.INFORMATION_MESSAGE);
+                   panelTransactions.cleanFields();
+               }else{
+                   JOptionPane.showMessageDialog(null,"Saldo Insuficiente","Error",JOptionPane.ERROR_MESSAGE);
+               }
+           } catch (Exception e) {
+               JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+           }
        }
+    }
+
+    public void exit() {
+        System.out.println("Sale de la Aplicación");
+        System.exit(0);
     }
 }

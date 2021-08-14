@@ -74,6 +74,6 @@ public class PanelTransactions extends PanelAccount {
 
     @Override
     public void cleanFields(){
-        //Limpiar Campos
+        value.setText("");
     }
 }
