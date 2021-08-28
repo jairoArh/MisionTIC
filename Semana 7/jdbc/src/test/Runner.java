@@ -1,6 +1,7 @@
 package test;
 
 import persistence.CustomerDao;
+import persistence.A;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,10 +36,17 @@ public class Runner {
                 System.out.printf("%s %s %s %d %s %s\n",nit,name,lastName,minResidue,city,phone);
             }
 
+            customerDao.addCustomer("827475","Mora Pedraza","Angela maría","340000","Paipa","4526344");
+
             resultSet.close();
             result.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("FINNNNNNNNNNNNNNN********");
+
+        A a = new A();
+
+        A.B b = a.new B();
     }
 }
