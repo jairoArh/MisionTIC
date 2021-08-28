@@ -35,14 +35,10 @@ class CustomerDaoTest {
     @Test
     void addCustomer(){
         CustomerDao customerDao = new CustomerDao();
-        try {
-            assertTrue( customerDao.addCustomer( "45523","López Vargas","Sergio","500000","Bogota D.C","3135022002"));
-            assertFalse( customerDao.addCustomer( "45523","Daza Sánchez","Juliana","400000","Bogota D.C","3007823402"));
-        } catch (SQLException e) {
-            System.out.println("Exception");
-            e.printStackTrace();
-        }
-        System.out.println("Passed");
+        assertThrows( SQLException.class, () -> {
+            customerDao.addCustomer( "45523","López Vargas","Sergio","500000","Bogota D.C","3135022002");
+        });
+
     }
 
     @Test
